@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>M02-S02-CP03-A Components</title>
+
+    <meta name="author" content="Robert (Finn) White">
+    <meta name="description" content="Bloc > WDT > M02-S02-CP03-A Components">
+  </head>
+  <body>
+
+    <div id="app"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+      class WorkoutSet extends React.Component {
+        render() {
+          return (
+            <li>Back Squat x 245 lbs x 5 reps</li>
+          );
+        }
+      }
+      class WorkoutRest extends React.Component {
+        render() {
+          return (
+            <li>Rest 1:30</li>
+          );
+        }
+      }
+      class WorkoutSession extends React.Component {
+        render() {
+          return (
+            <article>
+              <header>
+                <h3>Thursday, June 14, 2018 at 11:00am</h3>
+              </header>
+              <ol>
+                <WorkoutSet />
+                <WorkoutRest />
+                <WorkoutSet />
+                <WorkoutRest />
+                <WorkoutSet />
+              </ol>
+            </article>
+          );
+        }
+      }
+      class WorkoutLogbook extends React.Component {
+        render() {
+          return (
+            <section>
+              <header>
+                <h1>Workout Logbook</h1>
+              </header>
+              <WorkoutSession />
+            </section>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <WorkoutLogbook />, document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
