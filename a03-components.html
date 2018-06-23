@@ -21,43 +21,72 @@
       class WorkoutSet extends React.Component {
         render() {
           return (
-            <li>Back Squat x 245 lbs x 5 reps</li>
+            <li>{
+              this.props.movement +
+              " x " +
+              this.props.load + " " + this.props.loadUnits +
+              " x " +
+              this.props.reps + " reps"
+            }</li>
           );
         }
       }
+      WorkoutSet.defaultProps = {
+        loadUnits: "lbs"
+      };
+
       class WorkoutRest extends React.Component {
         render() {
           return (
-            <li>Rest 1:30</li>
+            <li>Rest {this.props.duration}</li>
           );
         }
       }
+
       class WorkoutSession extends React.Component {
         render() {
           return (
             <article>
               <header>
-                <h3>Thursday, June 14, 2018 at 11:00am</h3>
+                <h4>{this.props.date}</h4>
               </header>
               <ol>
-                <WorkoutSet />
-                <WorkoutRest />
-                <WorkoutSet />
-                <WorkoutRest />
-                <WorkoutSet />
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="225" reps="5"
+                />
+                <WorkoutRest duration="1:30"/>
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="235" reps="5"
+                />
+                <WorkoutRest duration="1:30"/>
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="245" reps="5"
+                />
               </ol>
             </article>
           );
         }
       }
+
       class WorkoutLogbook extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            workoutsTotal: 1
+          }
+        }
         render() {
           return (
             <section>
               <header>
                 <h1>Workout Logbook</h1>
+                <p>({this.state.workoutsTotal} workouts)</p>
               </header>
-              <WorkoutSession />
+              <WorkoutSession
+                date="Thursday, June 14, 2018 at 11:00am"/>
             </section>
           );
         }
