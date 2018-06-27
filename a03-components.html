@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>M02-S02-CP03-A Components</title>
+
+    <meta name="author" content="Robert (Finn) White">
+    <meta name="description" content="Bloc > WDT > M02-S02-CP03-A Components">
+  </head>
+  <body>
+
+    <div id="app"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+      class WorkoutSet extends React.Component {
+        render() {
+          return (
+            <li>{
+              this.props.movement +
+              " x " +
+              this.props.load + " " + this.props.loadUnits +
+              " x " +
+              this.props.reps + " reps"
+            }</li>
+          );
+        }
+      }
+      WorkoutSet.defaultProps = {
+        loadUnits: "lbs"
+      };
+
+      class WorkoutRest extends React.Component {
+        render() {
+          return (
+            <li>Rest {this.props.duration}</li>
+          );
+        }
+      }
+
+      class WorkoutSession extends React.Component {
+        render() {
+          return (
+            <article>
+              <header>
+                <h4>{this.props.date}</h4>
+              </header>
+              <ol>
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="225" reps="5"
+                />
+                <WorkoutRest duration="1:30"/>
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="235" reps="5"
+                />
+                <WorkoutRest duration="1:30"/>
+                <WorkoutSet
+                  movement="Back Squat"
+                  load="245" reps="5"
+                />
+              </ol>
+            </article>
+          );
+        }
+      }
+
+      class WorkoutLogbook extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            workoutsTotal: 1
+          }
+        }
+        render() {
+          return (
+            <section>
+              <header>
+                <h1>Workout Logbook</h1>
+                <p>({this.state.workoutsTotal} workouts)</p>
+              </header>
+              <WorkoutSession
+                date="Thursday, June 14, 2018 at 11:00am"/>
+            </section>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <WorkoutLogbook />, document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
